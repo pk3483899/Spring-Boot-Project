@@ -25,8 +25,4 @@ public class PostDto {
     @NotEmpty
     @Size(min=4, message = "Description should be at least 4 characters")
     private String content;
-
-    @NotEmpty
-    @Size(min=4, message = "Description should be at least 4 characters")
-    private String message;
 }

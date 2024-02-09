@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="posts")
 @Data
@@ -14,10 +17,15 @@ import lombok.NoArgsConstructor;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String title;
     private String description;
     private String content;
+
+    //post is the post object address
+    @OneToMany(mappedBy="post",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comments> comments=new ArrayList<>();//Here one post is connected to many comments
+
+
 }

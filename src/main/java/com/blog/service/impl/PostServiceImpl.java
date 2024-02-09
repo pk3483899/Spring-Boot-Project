@@ -40,7 +40,7 @@ public class PostServiceImpl implements PostService {
         dto.setDescription(savedPost.getDescription());
         dto.setContent(savedPost.getContent());
 
-        dto.setMessage("Post is created and saved");
+//        dto.setMessage("Post is created and saved");
 
         return dto;
     }
@@ -52,7 +52,7 @@ public class PostServiceImpl implements PostService {
             postRepo.deleteById(id);
         }
         else {
-throw new ResourceNotFoundException("Post not found at id "+id);
+            throw new ResourceNotFoundException("Post not found at id "+id);
         }
 
     }

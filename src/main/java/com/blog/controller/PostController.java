@@ -20,11 +20,10 @@ public class PostController {
 //@Autowired
     private PostService postService;
 
-
     public PostController(PostService postService) {
         this.postService = postService;
     }
-
+//http://localhost:8080/api/posts
     @PostMapping
     public ResponseEntity<?> createPost(@Valid @RequestBody PostDto postDto, BindingResult bindingResult)
     {
@@ -33,18 +32,18 @@ public class PostController {
             return new ResponseEntity<>(bindingResult.getFieldError().getDefaultMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
         PostDto dto = postService.createPost(postDto);
-//        return  new ResponseEntity<>("Post is created", HttpStatus.CREATED);
         return  new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
 
-    @DeleteMapping("/{id}")
+    //http://localhost:8080/api/posts/id
+    @DeleteMapping("/{id}")//path parameter
     public ResponseEntity<String> deletePost(@PathVariable long id) throws ResourceNotFoundException {
         postService.deletePost(id);
         return new ResponseEntity<>("Post is deleted", HttpStatus.OK);
     }
 //http:localhost:8080/api/posts?pageNo&apgeSize
-@GetMapping
+    @GetMapping
     public List<PostDto> getAllPosts(
             @RequestParam(name="pageNo", defaultValue ="0", required = false) int pageNo,
             @RequestParam(name="pageSize",defaultValue ="3",required = true) int pageSize,
